@@ -1,6 +1,8 @@
-import React from 'react'
-import styles from './styles.module.css'
-
-export const ExampleComponent = ({ text }) => {
-  return <div className={styles.test}>Example Component: React Intro{text}</div>
-}
+export {
+  ExampleComponent,
+  HelloWorld,
+  Overlay,
+  Popper,
+  Portal,
+  Intro
+} from './components'
