@@ -102,17 +102,19 @@ export const Intro = ({ steps, initialStep, enabled, onComplete }) => {
                   <div className="intro-main">
                     {steps[activeIndex].children}
                     <ul className="intro-steps">
-                      {[...Array(steps.length).keys()].map((id) => {
-                        return (
-                          <li
-                            key={id}
-                            className={classNames({
-                              active: id === activeIndex,
-                            })}
-                            onClick={handleSteps(id)}
-                          ></li>
-                        );
-                      })}
+                      {Array(steps.length - 1)
+                        .fill("")
+                        .map((_, index) => {
+                          return (
+                            <li
+                              key={index}
+                              className={classNames({
+                                active: index === activeIndex,
+                              })}
+                              onClick={handleSteps(index)}
+                            ></li>
+                          );
+                        })}
                     </ul>
                   </div>
                   <div className="intro-btn">

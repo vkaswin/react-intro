@@ -1,8 +1,8 @@
 import React, { useState } from "react";
-import { ExampleComponent, HelloWorld, Intro } from "react-intro";
-import "react-intro/dist/index.scss";
+import { Intro } from "react-intro";
 
 import "./index.scss";
+import "react-intro/dist/index.scss";
 
 const App = () => {
   const steps = [
@@ -88,9 +88,6 @@ const App = () => {
 
   return (
     <div className="container-fluid my-3">
-      <ExampleComponent text="Create React Library Example 😄" />
-      <HelloWorld />
-      {/* <Overlay isOpen={true} /> */}
       <button
         className="btn btn-primary intro-start"
         onClick={toggle}

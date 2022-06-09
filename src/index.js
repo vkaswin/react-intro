@@ -1,8 +1,1 @@
-export {
-  ExampleComponent,
-  HelloWorld,
-  Overlay,
-  Popper,
-  Portal,
-  Intro
-} from './components'
+export { Intro } from "./components/Intro";
