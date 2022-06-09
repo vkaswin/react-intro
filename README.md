@@ -13,14 +13,44 @@ npm install --save react-intro
 ## Usage
 
 ```jsx
-import React, { Component } from 'react'
+import { Intro } from "react-intro";
+import "react-intro/dist/index.css";
 
-import MyComponent from 'react-intro'
-import 'react-intro/dist/index.css'
+const Example = () => {
+  const steps = const steps = [
+    {
+      selector: "#intro-1",
+      position: "left-center",
+      children:
+        "Lorem Ipsum is simply dummy text of the printing and typesetting industry.",
+    },
+    {
+      selector: "#intro-2",
+      position: "bottom-center",
+      children:
+        "Lorem Ipsum is simply dummy text of the printing and typesetting industry.",
+    },
+    {
+      selector: "#intro-3",
+      position: "top-center",
+      children:
+        "Lorem Ipsum is simply dummy text of the printing and typesetting industry.",
+    },
+    {
+      selector: "#intro-4",
+      position: "bottom-end",
+      children:
+        "Lorem Ipsum is simply dummy text of the printing and typesetting industry.",
+    }];
 
-class Example extends Component {
+  const [enabled, setEnabled] = useState(false);
+
+  const toggle = () => {
+    setEnabled(!enabled);
+  };
+
   render() {
-    return <MyComponent />
+    return <Intro  steps={steps} enabled={enabled} onComplete={toggle} />;
   }
 }
 ```
