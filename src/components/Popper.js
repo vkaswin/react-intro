@@ -27,8 +27,6 @@ export const Popper = ({ render, referenceElement, position, offset }) => {
 
     const popper = popperElement.current.getBoundingClientRect();
 
-    console.log(reference, popper);
-
     const [placement] = position.split("-");
 
     const { innerWidth, innerHeight } = window;
