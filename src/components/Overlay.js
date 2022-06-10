@@ -5,7 +5,9 @@ import { classNames } from "../utils";
 export const Overlay = ({ isOpen, toggle }) => {
   return (
     <div
-      className={classNames("intro-overlay", { show: isOpen })}
+      className={classNames("intro-overlay", {
+        show: isOpen,
+      })}
       onClick={() => {
         isOpen && toggle();
       }}

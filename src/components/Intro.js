@@ -5,9 +5,16 @@ import { Popper } from "./Popper";
 import { Portal } from "./Portal";
 import { classNames } from "../utils";
 
-import "../styles.scss";
-
-export const Intro = ({ steps, initialStep, enabled, onComplete }) => {
+export const Intro = ({
+  steps,
+  initialStep,
+  enabled,
+  onComplete,
+  onChange,
+  nextLabel,
+  backLabel,
+  doneLabel,
+}) => {
   const referenceRef = useRef();
 
   const hightlightRef = useRef();
@@ -48,21 +55,21 @@ export const Intro = ({ steps, initialStep, enabled, onComplete }) => {
   };
 
   const handleBack = () => {
+    let index = activeIndex - 1;
     referenceRef.current.classList.remove("intro-highlight");
-    referenceRef.current = document.querySelector(
-      steps[activeIndex - 1].selector
-    );
+    referenceRef.current = document.querySelector(steps[index].selector);
     referenceRef.current.classList.add("intro-highlight");
-    setActiveIndex(activeIndex - 1);
+    onChange(index);
+    setActiveIndex(index);
   };
 
   const handleNext = () => {
+    let index = activeIndex + 1;
     referenceRef.current.classList.remove("intro-highlight");
-    referenceRef.current = document.querySelector(
-      steps[activeIndex + 1].selector
-    );
+    referenceRef.current = document.querySelector(steps[index].selector);
     referenceRef.current.classList.add("intro-highlight");
-    setActiveIndex(activeIndex + 1);
+    onChange(index);
+    setActiveIndex(index);
   };
 
   const handleDone = () => {
@@ -76,6 +83,7 @@ export const Intro = ({ steps, initialStep, enabled, onComplete }) => {
     referenceRef.current.classList.remove("intro-highlight");
     referenceRef.current = document.querySelector(steps[index].selector);
     referenceRef.current.classList.add("intro-highlight");
+    onChange(index);
     setActiveIndex(index);
   };
 
@@ -98,11 +106,11 @@ export const Intro = ({ steps, initialStep, enabled, onComplete }) => {
                 data-position={position}
                 style={styles}
               >
-                <div className="intro-content">
+                <div className={"intro-content"}>
                   <div className="intro-main">
                     {steps[activeIndex].children}
-                    <ul className="intro-steps">
-                      {Array(steps.length - 1)
+                    <ul className={"intro-steps"}>
+                      {Array(steps.length)
                         .fill("")
                         .map((_, index) => {
                           return (
@@ -119,16 +127,16 @@ export const Intro = ({ steps, initialStep, enabled, onComplete }) => {
                   </div>
                   <div className="intro-btn">
                     <button onClick={handleBack} disabled={activeIndex === 0}>
-                      Back
+                      {backLabel}
                     </button>
                     {activeIndex === steps.length - 1 ? (
-                      <button onClick={handleDone}>Done</button>
+                      <button onClick={handleDone}>{doneLabel}</button>
                     ) : (
                       <button
                         onClick={handleNext}
                         disabled={activeIndex === steps.length - 1}
                       >
-                        Next
+                        {nextLabel}
                       </button>
                     )}
                   </div>
@@ -139,7 +147,7 @@ export const Intro = ({ steps, initialStep, enabled, onComplete }) => {
           }}
         />
         <Overlay isOpen={enabled} zIndex={2000} toggle={handleDone} />
-        <div ref={hightlightRef} className="intro-highlight-container"></div>
+        <div ref={hightlightRef} className={"intro-highlight-container"}></div>
       </div>
     </Portal>
   );
@@ -149,16 +157,39 @@ Intro.propTypes = {
   steps: PropTypes.arrayOf(
     PropTypes.shape({
       selector: PropTypes.string.isRequired,
-      position: PropTypes.string.isRequired,
+      position: PropTypes.oneOf([
+        "left-center",
+        "left-start",
+        "left-end",
+        "right-center",
+        "right-start",
+        "right-end",
+        "top-center",
+        "top-start",
+        "top-end",
+        "bottom-center",
+        "bottom-start",
+        "bottom-end",
+      ]).isRequired,
       children: PropTypes.node.isRequired,
     })
   ),
   enabled: PropTypes.bool,
   initialStep: PropTypes.number,
+  onComplete: PropTypes.func,
+  onChange: PropTypes.func,
+  nextLabel: PropTypes.string,
+  backLabel: PropTypes.string,
+  doneLabel: PropTypes.string,
 };
 
 Intro.defaultProps = {
   steps: [],
   initialStep: 0,
   enabled: false,
+  onChange: () => {},
+  onComplete: () => {},
+  nextLabel: "Next",
+  backLabel: "Back",
+  doneLabel: "Done",
 };

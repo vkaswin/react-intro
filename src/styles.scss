@@ -13,11 +13,10 @@
 }
 
 .intro {
-  transform-origin: top;
-  animation: fadeOut 0.2s linear forwards;
+  animation: intro_fadeOut 0.2s linear forwards;
   z-index: 2001;
   &:is(.show) {
-    animation: fadeIn 0.2s linear forwards;
+    animation: intro_fadeIn 0.2s linear forwards;
   }
   .intro-content {
     position: relative;
@@ -29,14 +28,14 @@
     color: #000;
     text-align: justify;
     .intro-main {
-      padding: 15px;
+      padding: 12px;
     }
     .intro-steps {
       display: flex;
       justify-content: center;
       gap: 5px;
       padding: 0px;
-      margin: 15px 0px 0px 0px;
+      margin: 10px 0px 0px 0px;
       li {
         list-style: none;
         width: 7px;
@@ -57,14 +56,18 @@
       justify-content: space-between;
       gap: 10px;
       border-top: 1px solid #ddd;
-      padding: 10px 15px;
+      padding: 10px 12px;
       button {
-        background-color: #f4f4f4;
-        border: 1px solid #bdbdbd;
+        background-color: #007bff;
+        border: none;
         border-radius: 4px;
         width: 60px;
         font-size: 14px;
-        color: #424242;
+        color: white;
+        padding: 5px 0px;
+        &:disabled {
+          opacity: 0.7;
+        }
       }
     }
     .intro-arrow {
@@ -91,62 +94,62 @@
   transition: width 0.3s, height 0.3s, top 0.3s, left 0.3s;
 }
 
-.intro-arrow[data-position='left-center'] {
+.intro-arrow[data-position="left-center"] {
   right: -6px;
   top: calc(50% - 6px);
 }
 
-.intro-arrow[data-position='left-start'] {
+.intro-arrow[data-position="left-start"] {
   top: 10px;
   right: -6px;
 }
 
-.intro-arrow[data-position='left-end'] {
+.intro-arrow[data-position="left-end"] {
   right: -6px;
   bottom: 10px;
 }
 
-.intro-arrow[data-position='right-center'] {
+.intro-arrow[data-position="right-center"] {
   left: -6px;
   top: calc(50% - 6px);
 }
 
-.intro-arrow[data-position='right-start'] {
+.intro-arrow[data-position="right-start"] {
   top: 10px;
   left: -6px;
 }
 
-.intro-arrow[data-position='right-end'] {
+.intro-arrow[data-position="right-end"] {
   bottom: 10px;
   left: -6px;
 }
 
-.intro-arrow[data-position='top-center'] {
+.intro-arrow[data-position="top-center"] {
   left: 50%;
   bottom: -6px;
 }
 
-.intro-arrow[data-position='top-end'] {
+.intro-arrow[data-position="top-end"] {
   right: 10px;
   bottom: -6px;
 }
 
-.intro-arrow[data-position='top-start'] {
+.intro-arrow[data-position="top-start"] {
   left: 15px;
   bottom: -6px;
 }
 
-.intro-arrow[data-position='bottom-center'] {
+.intro-arrow[data-position="bottom-center"] {
   top: -6px;
   left: 50%;
 }
 
-.intro-arrow[data-position='bottom-start'] {
+.intro-arrow[data-position="bottom-start"] {
   top: -6px;
   left: 10px;
 }
 
-.intro-arrow[data-position='bottom-end'] {
+.intro-arrow[data-position="bottom-end"] {
   top: -6px;
   right: 10px;
 }
