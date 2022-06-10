@@ -1,4 +1,4 @@
-# React-intro
+# React Intro
 
 > React Intro is a library for creating step-by-step and powerful customer onboarding tours [DEMO](https://vkaswin.github.io/react-intro)
 
