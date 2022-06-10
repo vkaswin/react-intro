@@ -10,23 +10,6 @@
 npm install --save reactjs-intro
 ```
 
-## Usage
-
-```jsx
-import Intro from "react-intro";
-import "react-intro/dist/index.css";
-
-const Example = () => {
-  const [enabled, setEnabled] = useState(false);
-
-  const toggle = () => {
-    setEnabled(!enabled);
-  };
-
-  return <Intro steps={steps} enabled={enabled} onComplete={toggle} />;
-};
-```
-
 ### Steps
 
 ```js
@@ -70,11 +53,73 @@ const steps = [
 ];
 ```
 
-| Name       | Description                       |     Type      |
-| ---------- | --------------------------------- | :-----------: |
-| `selector` | CSS selector to use for the step. |    String     |
-| `position` | Position of the tooltip.          |    String     |
-| `children` | The tooltip content.              | String or JSX |
+| Name       | Description             |     Type      |
+| ---------- | ----------------------- | :-----------: |
+| `selector` | CSS selector            |    String     |
+| `position` | Position of the tooltip |    String     |
+| `children` | The tooltip content     | String or JSX |
+
+## Usage
+
+```jsx
+import Intro from "react-intro";
+import "react-intro/dist/index.css";
+
+const Example = () => {
+  const [enabled, setEnabled] = useState(false);
+
+  const toggle = () => {
+    setEnabled(!enabled);
+  };
+
+  return <Intro steps={steps} enabled={enabled} onComplete={toggle} />;
+};
+```
+
+## PropTypes
+
+```js
+Intro.propTypes = {
+  steps: PropTypes.arrayOf(
+    PropTypes.shape({
+      selector: PropTypes.string.isRequired,
+      position: PropTypes.oneOf([
+        "left-center",
+        "left-start",
+        "left-end",
+        "right-center",
+        "right-start",
+        "right-end",
+        "top-center",
+        "top-start",
+        "top-end",
+        "bottom-center",
+        "bottom-start",
+        "bottom-end",
+      ]).isRequired,
+      children: PropTypes.node.isRequired,
+    })
+  ),
+  enabled: PropTypes.bool,
+  initialStep: PropTypes.number,
+  onComplete: PropTypes.func,
+  onChange: PropTypes.func,
+  nextLabel: PropTypes.string,
+  backLabel: PropTypes.string,
+  doneLabel: PropTypes.string,
+};
+
+Intro.defaultProps = {
+  steps: [],
+  initialStep: 0,
+  enabled: false,
+  onChange: () => {},
+  onComplete: () => {},
+  nextLabel: "Next",
+  backLabel: "Back",
+  doneLabel: "Done",
+};
+```
 
 ### Props
 
