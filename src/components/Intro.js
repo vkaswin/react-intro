@@ -34,7 +34,11 @@ export const Intro = ({
   }, [show, referenceRef.current]);
 
   useEffect(() => {
-    if (!enabled) return;
+    if (!enabled) {
+      setShow(false);
+      setActiveIndex(0);
+      return;
+    }
     referenceRef.current = document.querySelector(steps[activeIndex].selector);
     referenceRef.current.classList.add("intro-highlight");
     setShow(true);
