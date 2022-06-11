@@ -98,7 +98,6 @@ export const Popper = ({
   };
 
   const canPlaceOnTop = ({ reference, popper }) => {
-    console.log(reference.y + offset, popper.height);
     return reference.y > popper.height;
   };
 

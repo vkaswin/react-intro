@@ -35,8 +35,7 @@ export const Intro = ({
 
   useEffect(() => {
     if (!enabled) {
-      setShow(false);
-      setActiveIndex(0);
+      reset();
       return;
     }
     referenceRef.current = document.querySelector(steps[activeIndex].selector);
@@ -77,8 +76,13 @@ export const Intro = ({
   };
 
   const handleDone = () => {
-    referenceRef.current.classList.remove("intro-highlight");
     onComplete();
+    reset();
+  };
+
+  const reset = () => {
+    if (!referenceRef.current) return;
+    referenceRef.current.classList.remove("intro-highlight");
     setActiveIndex(initialStep);
     setShow(false);
   };
