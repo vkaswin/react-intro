@@ -104,7 +104,7 @@ export const Intro = ({
                   show,
                 })}
                 data-position={position}
-                style={styles}
+                style={styles.popper}
               >
                 <div className={"intro-content"}>
                   <div className="intro-main">
@@ -140,11 +140,12 @@ export const Intro = ({
                       </button>
                     )}
                   </div>
-                  <div className="intro-arrow" data-position={position}></div>
+                  <div className="intro-arrow" style={styles.arrow}></div>
                 </div>
               </div>
             );
           }}
+          arrow
         />
         <Overlay isOpen={enabled} zIndex={2000} toggle={handleDone} />
         <div ref={hightlightRef} className={"intro-highlight-container"}></div>
