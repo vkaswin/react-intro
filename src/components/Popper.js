@@ -298,7 +298,9 @@ export const Popper = ({
 
   const placeOnBottomStart = (args) => {
     const { reference, popper, innerWidth, isDefault = false } = args;
-    if (isDefault || !canPlaceOnBottom(args)) return false;
+
+    if (!canPlaceOnBottom(args)) return false;
+
     let right = innerWidth - reference.x;
     let left =
       right < popper.width
@@ -317,23 +319,34 @@ export const Popper = ({
   };
 
   const placeOnBottomCenter = (args) => {
-    if (!canPlaceOnBottom(args)) return false;
-    const { reference, popper, innerWidth } = args;
-    let right = innerWidth - reference.x;
-    let left =
-      right < popper.width
-        ? Math.max(reference.x - (popper.width - right + offset), 10)
-        : Math.max(reference.x + (reference.width / 2 - popper.width / 2), 10);
-    let top = reference.y + reference.height + offset;
-    return {
-      popper: {
-        x: left,
-        y: top,
-      },
-      ...(arrow && {
-        arrow: { x: reference.x - left + reference.width / 2, y: 0 },
-      }),
+    const { reference, popper, innerWidth, isDefault } = args;
+
+    const getCoordinates = () => {
+      let right = innerWidth - reference.x;
+      let left =
+        right < popper.width
+          ? Math.max(reference.x - (popper.width - right + offset), 10)
+          : Math.max(
+              reference.x + (reference.width / 2 - popper.width / 2),
+              10
+            );
+      let top = reference.y + reference.height + offset;
+      return {
+        popper: {
+          x: left,
+          y: top,
+        },
+        ...(arrow && {
+          arrow: { x: reference.x - left + reference.width / 2, y: 0 },
+        }),
+      };
     };
+
+    if (isDefault) return getCoordinates();
+
+    if (!canPlaceOnBottom(args)) return false;
+
+    return getCoordinates();
   };
 
   const placeOnBottomEnd = (args) => {
@@ -401,13 +414,15 @@ export const Popper = ({
       ...getAdjacentSides(args),
     ].filter(Boolean);
 
-    if (posiblePositions.length !== 0) {
-      let placement = `${posiblePositions[0]}-center`;
-      const popperRect = popperPositions[placement]?.(args);
-      setPopperPosition({ ...popperRect, placement });
-    } else {
-      popperPositions["bottom-start"]({ ...args, isDefault: true });
-    }
+    let placement =
+      posiblePositions.length === 0
+        ? "bottom-center"
+        : `${posiblePositions[0]}-center`;
+    const popperRect = popperPositions[placement]?.({
+      ...args,
+      ...(posiblePositions.length === 0 && { isDefault: true }),
+    });
+    setPopperPosition({ ...popperRect, placement });
   };
 
   const setPopperPosition = ({

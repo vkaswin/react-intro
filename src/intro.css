@@ -1,0 +1,126 @@
+.intro-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.5);
+  z-index: 2000;
+  animation: intro_fadeOut 0.3s linear forwards;
+}
+.intro-overlay:is(.show) {
+  animation: intro_fadeIn 0.3s linear forwards;
+}
+.intro {
+  animation: intro_fadeOut 0.2s linear forwards;
+  transition: transform 0.3s;
+  z-index: 2001;
+}
+.intro:is(.show) {
+  animation: intro_fadeIn 0.2s linear forwards;
+}
+.intro .intro-content {
+  position: relative;
+  background-color: #fff;
+  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.25);
+  border-radius: 4px;
+  font-size: 14px;
+  max-width: 250px;
+  color: #000;
+  text-align: justify;
+}
+.intro .intro-content .intro-main {
+  padding: 12px;
+}
+.intro .intro-content .intro-steps {
+  display: flex;
+  justify-content: center;
+  gap: 5px;
+  padding: 0px;
+  margin: 10px 0px 0px 0px;
+}
+.intro .intro-content .intro-steps li {
+  list-style: none;
+  width: 7px;
+  height: 7px;
+  background-color: #ccc;
+  border-radius: 50%;
+  transition: width 0.2s ease-in-out;
+  cursor: pointer;
+}
+.intro .intro-content .intro-steps li:is(.active) {
+  width: 15px;
+  background-color: #999;
+  border-radius: 4px;
+}
+.intro .intro-content .intro-btn {
+  display: flex;
+  justify-content: space-between;
+  gap: 10px;
+  border-top: 1px solid #ddd;
+  padding: 10px 12px;
+}
+.intro .intro-content .intro-btn button {
+  background-color: #007bff;
+  border: none;
+  border-radius: 4px;
+  width: 60px;
+  font-size: 14px;
+  color: white;
+  padding: 5px 0px;
+}
+.intro .intro-content .intro-btn button:disabled {
+  opacity: 0.7;
+}
+.intro .intro-content .intro-arrow {
+  position: absolute;
+  border-width: 8px;
+  border-style: solid;
+  border-color: #fff transparent transparent transparent;
+}
+.intro-highlight {
+  position: relative;
+  z-index: 2001;
+}
+.intro-highlight-container {
+  position: absolute;
+  z-index: 2000;
+  background-color: #fff;
+  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.25);
+  outline: 5px solid #fff;
+  transition: width 0.3s, height 0.3s, top 0.3s, left 0.3s;
+}
+.intro[data-position^="left"] .intro-arrow {
+  transform: rotate(-90deg);
+  margin-top: -6px;
+  margin-left: -1px;
+}
+.intro[data-position^="right"] .intro-arrow {
+  transform: rotate(90deg);
+  margin-left: -15px;
+  margin-top: -6px;
+}
+.intro[data-position^="top"] .intro-arrow {
+  transform: rotate(0deg);
+  margin-top: -1px;
+}
+.intro[data-position^="bottom"] .intro-arrow {
+  transform: rotate(180deg);
+  margin-top: -15px;
+}
+@keyframes intro_fadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+@keyframes intro_fadeOut {
+  from {
+    opacity: 1;
+  }
+  to {
+    opacity: 0;
+  }
+}
