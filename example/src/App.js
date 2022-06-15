@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import Intro from "react-intro";
 
 import "./index.scss";
+import "react-intro/dist/index.css";
 
 const App = () => {
   const steps = [
